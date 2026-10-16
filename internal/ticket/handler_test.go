@@ -193,7 +193,7 @@ type failingStore struct{}
 
 var errBoom = errors.New("db down")
 
-func (failingStore) Ping(context.Context) error { return errBoom }
+func (failingStore) Ping(context.Context) error                    { return errBoom }
 func (failingStore) List(context.Context) ([]ticket.Ticket, error) { return nil, errBoom }
 func (failingStore) Get(context.Context, int64) (ticket.Ticket, error) {
 	return ticket.Ticket{}, errBoom
@@ -205,7 +205,7 @@ func (failingStore) Update(context.Context, int64, ticket.Input) (ticket.Ticket,
 	return ticket.Ticket{}, errBoom
 }
 func (failingStore) Delete(context.Context, int64) error { return errBoom }
-func (failingStore) Close() {}
+func (failingStore) Close()                              {}
 
 func TestInternalErrorsAreHidden(t *testing.T) {
 	h := newServer(t, failingStore{})
