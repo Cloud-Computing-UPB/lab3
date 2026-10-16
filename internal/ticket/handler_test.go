@@ -205,7 +205,7 @@ func (failingStore) Update(context.Context, int64, ticket.Input) (ticket.Ticket,
 	return ticket.Ticket{}, errBoom
 }
 func (failingStore) Delete(context.Context, int64) error { return errBoom }
-func (failingStore) Close()                              {}
+func (failingStore) Close() {}
 
 func TestInternalErrorsAreHidden(t *testing.T) {
 	h := newServer(t, failingStore{})
